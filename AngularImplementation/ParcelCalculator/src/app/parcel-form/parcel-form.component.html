@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8">
+        <form [formGroup]="form" (keyup)=calculateType()>
+            <div class="form-group">
+                <label>Height(mm)</label>
+                <input class="form-control" type=number min="0" max="600" formControlName="height" />
+            </div>
+            <div class="form-group">
+                <label>Width(mm)</label>
+                <input class="form-control" type=number min="0" max="600" formControlName="width" />
+            </div>
+            <div class="form-group">
+                <label>Breadth(mm)</label>
+                <input class="form-control" type=number min="0" max="600" formControlName="breadth" />
+            </div>
+            <div class="form-group">
+                <label>Weight(kg)</label>
+                <input class="form-control" type=number min="0" max="25" formControlName="weight" />
+            </div>
+            <div *ngIf="form.valid">
+                <div class="form-group">
+                    <label>Parcel Type</label>
+                    <input class="form-control" readonly type=text value="{{type}}" />
+                </div>
+                <div class="form-group">
+                    <label>Cost(NZD)</label>
+                    <input class="form-control" readonly value="{{cost|currency}}" />
+                </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="form.errors && form.dirty">
+                <div *ngIf="form.errors.maxWeightExceeded">Max weight is {{maxWeight}}kgs!</div>
+                <div *ngIf="form.errors.maxDimensionsExceeded">Max Dimensions Exceeded!</div>
+                <div *ngIf="form.errors.fillAllFields">Please fill all fields correctly.</div>
+            </div>
+        </form>
+    </div>
+</div>
